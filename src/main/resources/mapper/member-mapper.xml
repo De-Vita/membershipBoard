@@ -22,6 +22,10 @@
         select * from member_table where memberEmail = #{memberEmail} and memberPassword = #{memberPassword}
     </select>
 
+    <select id="findFile" resultType="memberProfile">
+        select * from member_profile_table where memberId = #{id}
+    </select>
+
 </mapper>
 
 

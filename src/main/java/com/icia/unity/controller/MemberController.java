@@ -1,11 +1,13 @@
 package com.icia.unity.controller;
 
 import com.icia.unity.dto.MemberDTO;
+import com.icia.unity.dto.MemberProfileDTO;
 import com.icia.unity.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -57,6 +59,21 @@ public class MemberController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage(HttpSession session, Model model) {
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+        if (memberDTO.getMemberProfileAttached() == 1) {
+            Long memberId = memberDTO.getId();
+            System.out.println("memberId = " + memberId);
+            MemberProfileDTO memberProfileDTO = memberService.findFile(memberId);
+            model.addAttribute("profile", memberProfileDTO);
+            System.out.println("memberProfileDTO = " + memberProfileDTO);
+        }
+        return "memberPages/memberDetail";
     }
 
 }

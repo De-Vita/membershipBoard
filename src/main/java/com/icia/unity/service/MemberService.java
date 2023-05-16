@@ -48,4 +48,8 @@ public class MemberService {
         }
     }
 
+    public MemberProfileDTO findFile(Long memberId) {
+        return memberRepository.findFile(memberId);
+    }
+
 }

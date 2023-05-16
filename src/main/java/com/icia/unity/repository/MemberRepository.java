@@ -30,4 +30,8 @@ public class MemberRepository {
         return sql.selectOne("Member.login", memberDTO);
     }
 
+    public MemberProfileDTO findFile(Long memberId) {
+        return sql.selectOne("Member.findFile", memberId);
+    }
+
 }

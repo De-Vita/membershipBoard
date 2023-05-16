@@ -17,6 +17,7 @@
         <li>
             <c:choose>
                 <c:when test="${sessionScope.loginEmail != null}">
+                    <a href="/member/mypage">mypage</a>
                     <a href="/member/logout">log out</a>
                     <h2>${sessionScope.loginEmail}님 환영합니다</h2>
                 </c:when>
