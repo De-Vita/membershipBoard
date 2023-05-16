@@ -42,4 +42,13 @@ public class BoardRepository {
         sql.delete("Board.delete", id);
     }
 
+    public BoardDTO update(BoardDTO boardDTO) {
+        sql.update("Board.update", boardDTO);
+        return boardDTO;
+    }
+
+    public void deleteFile(Long id) {
+        sql.delete("Board.deleteFile", id);
+    }
+
 }

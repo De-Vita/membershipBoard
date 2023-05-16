@@ -67,5 +67,10 @@
         const id = '${board.id}';
         location.href = "/board/delete?id=" + id;
     }
+    const board_update = () => {
+        const id = '${board.id}';
+        location.href = "/board/update?id=" + id;
+    }
+
 </script>
 </html>
