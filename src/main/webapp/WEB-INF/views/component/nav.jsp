@@ -15,6 +15,7 @@
     <ul>
         <li><a href="/member/save">회원가입</a></li>
         <li><a href="/board/">글 목록</a></li>
+        <li><a href="/board/paging">페이징목록</a></li>
         <c:if test="${sessionScope.loginEmail == 'admin'}">
             <li><a href="/member/members">회원 목록</a></li>
         </c:if>
