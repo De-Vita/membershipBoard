@@ -39,4 +39,13 @@ public class MemberService {
         return memberRepository.findByMemberEmail(loginEmail);
     }
 
+    public boolean login(MemberDTO memberDTO) {
+        MemberDTO dto = memberRepository.login(memberDTO);
+        if (dto != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -26,5 +26,8 @@ public class MemberRepository {
         return sql.selectOne("Member.findByMemberEmail", loginEmail);
     }
 
+    public MemberDTO login(MemberDTO memberDTO) {
+        return sql.selectOne("Member.login", memberDTO);
+    }
 
 }
