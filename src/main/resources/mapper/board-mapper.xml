@@ -30,6 +30,10 @@
         select * from board_file_table where boardId = #{boardId}
     </select>
 
+    <delete id="delete" parameterType="Long">
+        delete from board_table where id = #{id}
+    </delete>
+
 </mapper>
 
 

@@ -60,5 +60,12 @@
             <button onclick="board_update()">수정</button>
             <button onclick="board_delete()">삭제</button>
         </c:if>
+
 </body>
+<script>
+    const board_delete = () => {
+        const id = '${board.id}';
+        location.href = "/board/delete?id=" + id;
+    }
+</script>
 </html>

@@ -56,4 +56,8 @@ public class BoardService {
         return boardRepository.findFile(id);
     }
 
+    public void delete(Long id) {
+        boardRepository.delete(id);
+    }
+
 }
