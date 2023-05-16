@@ -29,7 +29,7 @@ public class MemberService {
             memberProfileDTO.setOriginalFileName(originalFilename);
             memberProfileDTO.setStoredFileName(storedFilename);
             memberProfileDTO.setMemberId(dto.getId());
-            String savePath = "D:\\springframework_img\\" + storedFilename;
+            String savePath = "C:\\springframework_img\\" + storedFilename;
             memberDTO.getMemberProfile().transferTo(new File(savePath));
             memberRepository.saveFile(memberProfileDTO);
         }
@@ -50,6 +50,26 @@ public class MemberService {
 
     public MemberProfileDTO findFile(Long memberId) {
         return memberRepository.findFile(memberId);
+    }
+
+    public void update(MemberDTO memberDTO) throws IOException {
+        if (memberDTO.getMemberProfile().isEmpty()) {
+            memberDTO.setMemberProfileAttached(0);
+            memberRepository.update(memberDTO);
+        } else {
+            memberDTO.setMemberProfileAttached(1);
+            MemberDTO dto = memberRepository.update(memberDTO);
+            memberRepository.deleteProfile(memberDTO.getId());
+            String originalFilename = memberDTO.getMemberProfile().getOriginalFilename();
+            String storedFilename = UUID.randomUUID().toString() + "-" + originalFilename;
+            MemberProfileDTO memberProfileDTO = new MemberProfileDTO();
+            memberProfileDTO.setOriginalFileName(originalFilename);
+            memberProfileDTO.setStoredFileName(storedFilename);
+            memberProfileDTO.setMemberId(dto.getId());
+            memberRepository.saveFile(memberProfileDTO);
+            String savePath = "C:\\springframework_img\\" + storedFilename;
+            memberDTO.getMemberProfile().transferTo(new File(savePath));
+        }
     }
 
 }

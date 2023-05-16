@@ -65,6 +65,7 @@ public class MemberController {
     public String mypage(HttpSession session, Model model) {
         String loginEmail = (String) session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        System.out.println("memberDTO = " + memberDTO);
         model.addAttribute("member", memberDTO);
         if (memberDTO.getMemberProfileAttached() == 1) {
             Long memberId = memberDTO.getId();
@@ -74,6 +75,27 @@ public class MemberController {
             System.out.println("memberProfileDTO = " + memberProfileDTO);
         }
         return "memberPages/memberDetail";
+    }
+
+    @GetMapping("/update")
+    public String updateForm(HttpSession session, Model model) {
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        if (memberDTO.getMemberProfileAttached() == 1) {
+            Long memberId = memberDTO.getId();
+            MemberProfileDTO memberProfileDTO = memberService.findFile(memberId);
+            model.addAttribute("profile", memberProfileDTO);
+        }
+        model.addAttribute("member", memberDTO);
+        return "memberPages/memberUpdate";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO, Model model) throws IOException {
+        memberService.update(memberDTO);
+        MemberDTO updateMember = memberService.findByMemberEmail(memberDTO.getMemberEmail());
+        model.addAttribute("member", updateMember);
+        return "redirect:/member/mypage";
     }
 
 }

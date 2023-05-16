@@ -26,6 +26,16 @@
         select * from member_profile_table where memberId = #{id}
     </select>
 
+    <update id="update" parameterType="member" useGeneratedKeys="true" keyProperty="id">
+        update member_table set memberEmail = #{memberEmail}, memberName = #{memberName}, memberMobile = #{memberMobile}, memberProfileAttached = #{memberProfileAttached}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProfile" parameterType="Long">
+        delete from member_profile_table where memberId = #{id}
+    </delete>
+
+
 </mapper>
 
 
