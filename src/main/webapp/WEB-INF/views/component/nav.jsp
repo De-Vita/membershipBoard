@@ -14,6 +14,9 @@
 <body>
     <ul>
         <li><a href="/member/save">회원가입</a></li>
+        <c:if test="${sessionScope.loginEmail == 'admin'}">
+            <li><a href="/member/members">회원 목록</a></li>
+        </c:if>
         <li>
             <c:choose>
                 <c:when test="${sessionScope.loginEmail != null}">

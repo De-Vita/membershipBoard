@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -69,6 +70,15 @@ public class MemberService {
             memberRepository.saveFile(memberProfileDTO);
             String savePath = "C:\\springframework_img\\" + storedFilename;
             memberDTO.getMemberProfile().transferTo(new File(savePath));
+        }
+    }
+
+    public List<MemberDTO> findAll() {
+        List<MemberDTO> memberDTOList = memberRepository.findAll();
+        if (memberDTOList.size() == 0) {
+            return null;
+        } else {
+            return memberDTOList;
         }
     }
 

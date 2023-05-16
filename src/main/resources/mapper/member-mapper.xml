@@ -35,6 +35,9 @@
         delete from member_profile_table where memberId = #{id}
     </delete>
 
+    <select id="findAll" resultType="member">
+        select * from member_table
+    </select>
 
 </mapper>
 

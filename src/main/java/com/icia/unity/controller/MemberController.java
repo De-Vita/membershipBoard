@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
+
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -96,6 +98,13 @@ public class MemberController {
         MemberDTO updateMember = memberService.findByMemberEmail(memberDTO.getMemberEmail());
         model.addAttribute("member", updateMember);
         return "redirect:/member/mypage";
+    }
+
+    @GetMapping("/members")
+    public String findAll(Model model) {
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        model.addAttribute("memberList", memberDTOList);
+        return "memberPages/memberList";
     }
 
 }
