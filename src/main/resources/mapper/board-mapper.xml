@@ -18,6 +18,18 @@
         select * from board_table;
     </select>
 
+    <update id="updateHits" parameterType="Long">
+        update board_table set boardHits = boardHits + 1 where id = #{id}
+    </update>
+
+    <select id="findById" parameterType="Long" resultType="board">
+        select * from board_table where id = #{id}
+    </select>
+
+    <select id="findFile" parameterType="Long" resultType="boardFile">
+        select * from board_file_table where boardId = #{boardId}
+    </select>
+
 </mapper>
 
 

@@ -44,4 +44,16 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
+    public void updateHits(Long id) {
+        boardRepository.updateHits(id);
+    }
+
+    public BoardDTO findById(Long id) {
+        return boardRepository.findById(id);
+    }
+
+    public List<BoardFileDTO> findFile(Long id) {
+        return boardRepository.findFile(id);
+    }
+
 }

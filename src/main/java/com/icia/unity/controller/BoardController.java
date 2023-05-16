@@ -1,16 +1,14 @@
 package com.icia.unity.controller;
 
 import com.icia.unity.dto.BoardDTO;
+import com.icia.unity.dto.BoardFileDTO;
 import com.icia.unity.dto.MemberDTO;
 import com.icia.unity.service.BoardService;
 import com.icia.unity.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -44,6 +42,18 @@ public class BoardController {
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
         return "boardPages/boardList";
+    }
+
+    @GetMapping
+    public String findById(@RequestParam("id") Long id, Model model) {
+        boardService.updateHits(id);
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        if (boardDTO.getFileAttached() == 1) {
+            List<BoardFileDTO> boardFileDTO = boardService.findFile(id);
+            model.addAttribute("boardFileList", boardFileDTO);
+        }
+        return "boardPages/boardDetail";
     }
 
 }
