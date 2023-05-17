@@ -4,9 +4,6 @@ create database db_springframework;
 create user user_springframework@localhost identified by '1234';
 grant all privileges on db_springframework.* to user_springframework@localhost;
 ```
-create database db_springframework;
-create user user_springframework@localhost identified by '1234';
-grant all privileges on db_springframework.* to user_springframework@localhost;
 ### tables
 ```mysql
 -- member_table
